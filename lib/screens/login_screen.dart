@@ -1,27 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:soch_ke_bataunga/models/constants.dart';
-import 'package:get/get.dart' as getx;
-import 'package:soch_ke_bataunga/screens/decide_screen.dart';
+import 'package:soch_ke_bataunga/controller/google_sign.dart';
+import 'package:soch_ke_bataunga/widgets/container_text.dart';
+import 'package:soch_ke_bataunga/widgets/my_button.dart';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+import '../models/constants.dart';
 
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  void navigate() async {
-    await Future.delayed(const Duration(milliseconds: 1500));
-    getx.Get.to(() => const DecideScreen());
-  }
-
-  @override
-  void initState() {
-    navigate();
-    super.initState();
-  }
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -43,17 +29,18 @@ class _SplashScreenState extends State<SplashScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  "Undercover",
-                  style: GoogleFonts.luckiestGuy(fontSize: 30),
+                const ContainerText(
+                  text:
+                      "Sign In with your google account.\nTo play with your friends",
                 ),
                 const SizedBox(
                   height: 50,
                 ),
-                const SizedBox(
-                  width: 30,
-                  height: 30,
-                  child: CircularProgressIndicator(),
+                CartoonButton(
+                  function: () async {
+                    await MySignin().myGoogleSignin();
+                  },
+                  title: "Google SignIn",
                 ),
               ],
             ),
